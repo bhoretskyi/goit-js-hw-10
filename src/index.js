@@ -1,4 +1,4 @@
-export{selectors}
+export { selectors };
 import axios from 'axios';
 import { fetchBreeds } from './cat-api';
 import { fetchCatByBreed } from './cat-api';
@@ -7,20 +7,20 @@ AUTH_TOKEN =
 
 axios.defaults.baseURL = 'https://api.thecatapi.com/v1/';
 axios.defaults.headers.common['x-api-key'] = AUTH_TOKEN;
-const selectors ={
-    select: document.querySelector('.breed-select'),
-    info: document.querySelector(".cat-info")
+const selectors = {
+  select: document.querySelector('.breed-select'),
+  info: document.querySelector('.cat-info'),
+  loader: document.querySelector('.loader'),
+  error: document.querySelector('.error'),
+};
 
-}
+selectors.error.hidden = true
+fetchBreeds();
 
-fetchBreeds()
-
-selectors.select.addEventListener('change', onChangeClick)
-
+selectors.select.addEventListener('change', onChangeClick);
 
 function onChangeClick() {
-    const selected = selectors.select.value
-    fetchCatByBreed(selected)
-
+  const selected = selectors.select.value;
+  fetchCatByBreed(selected);
 }
-
+console.log(selectors.loader.hidden);
