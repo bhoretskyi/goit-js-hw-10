@@ -8,7 +8,6 @@ function fetchBreeds() {
     .get('/breeds/')
     .then(response => {
       if (response.status !== 200) {
-       
         throw new Error(response.status);
       }
 
@@ -23,7 +22,7 @@ function fetchBreeds() {
       );
     })
     .catch(error => {
-      selectors.error.hidden = false
+      selectors.error.hidden = false;
       console.log(error);
     })
     .finally(() => {
@@ -35,11 +34,10 @@ function fetchCatByBreed(breedId) {
   selectors.loader.hidden = false;
   selectors.info.hidden = true;
   selectors.error.hidden = true;
-  
-   return axios
+
+  return axios
     .get(`/images/search?breed_ids=${breedId}`)
     .then(response => {
-      
       if (response.status !== 200) {
         throw new Error(response.status);
       }
@@ -53,17 +51,12 @@ function fetchCatByBreed(breedId) {
       <p>${data[0].breeds[0].temperament}</p>
       <p>${data[0].breeds[0].description}</p>
       `;
-      
-      console.log(data);
     })
     .catch(err => {
-      selectors.error.hidden = false
+      selectors.error.hidden = false;
       console.log(err);
-    
-      
     })
     .finally(() => {
-   
       selectors.loader.hidden = true;
       selectors.info.hidden = false;
     });

@@ -23,4 +23,4 @@ function onChangeClick() {
   const selected = selectors.select.value;
   fetchCatByBreed(selected);
 }
-console.log(selectors.loader.hidden);
+
