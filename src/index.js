@@ -13,14 +13,51 @@ const selectors = {
   loader: document.querySelector('.loader'),
   error: document.querySelector('.error'),
 };
-
+selectors.select.hidden = true
 selectors.error.hidden = true;
-fetchBreeds();
+fetchBreeds()
+  .then(data => {
+selectors.select.hidden = false
+
+    data.map(breed =>
+      selectors.select.insertAdjacentHTML(
+        'beforeend',
+        `<option value="${breed.id}">${breed.name}</option>`
+      )
+    );
+  })
+  .catch(error => {
+    selectors.error.hidden = false;
+    console.log(error);
+  })
+  .finally(() => {
+    selectors.loader.hidden = true;
+  });
 
 selectors.select.addEventListener('change', onChangeClick);
 
 function onChangeClick() {
   const selected = selectors.select.value;
-  fetchCatByBreed(selected);
+  fetchCatByBreed(selected)
+    .then(data => {
+      selectors.error.hidden = true;
+      selectors.loader.hidden = false;
+      selectors.info.hidden = true;
+      selectors.info.innerHTML = `<img src=${data[0].url}
+      alt=${data[0].breeds[0].name}
+      width="400" >
+    <h1>${data[0].breeds[0].name}</h1>
+    <p>${data[0].breeds[0].temperament}</p>
+    <p>${data[0].breeds[0].description}</p>
+    `;
+    })
+    .catch(err => {
+      selectors.error.hidden = false;
+      selectors.info.innerHTML = ''
+      console.log(err);
+    })
+    .finally(() => {
+      selectors.loader.hidden = true;
+      selectors.info.hidden = false;
+    });
 }
-
