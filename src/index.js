@@ -2,7 +2,7 @@ export { selectors };
 import axios from 'axios';
 import { fetchBreeds } from './cat-api';
 import { fetchCatByBreed } from './cat-api';
-AUTH_TOKEN =
+const AUTH_TOKEN =
   'live_HOlAJq960GSjR7q23CQ8vgbJTnpOghPZvhNu5ItrydST1Pbap95qIDCIfD8ifAuA';
 
 axios.defaults.baseURL = 'https://api.thecatapi.com/v1/';
@@ -14,7 +14,7 @@ const selectors = {
   error: document.querySelector('.error'),
 };
 
-selectors.error.hidden = true
+selectors.error.hidden = true;
 fetchBreeds();
 
 selectors.select.addEventListener('change', onChangeClick);

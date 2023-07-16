@@ -7,9 +7,7 @@ function fetchBreeds() {
   axios
     .get('/breeds/')
     .then(response => {
-      
       if (response.status !== 200) {
-        
         throw new Error(response.status);
       }
 
@@ -25,18 +23,18 @@ function fetchBreeds() {
     })
     .catch(error => {
       console.log(error);
-    }).finally(() => {
-      selectors.loader.hidden = true
+    })
+    .finally(() => {
+      selectors.loader.hidden = true;
     });
 }
 
 function fetchCatByBreed(breedId) {
-  selectors.loader.hidden = false
-  selectors.info.hidden = true
+  selectors.loader.hidden = false;
+  selectors.info.hidden = true;
   return axios
     .get(`/images/search?breed_ids=${breedId}`)
     .then(response => {
-     
       if (response.status !== 200) {
         throw new Error(response.status);
       }
@@ -57,8 +55,7 @@ function fetchCatByBreed(breedId) {
       selectors.error.hidden = false;
     })
     .finally(() => {
-      selectors.loader.hidden = true
-  selectors.info.hidden = false
-
+      selectors.loader.hidden = true;
+      selectors.info.hidden = false;
     });
 }
